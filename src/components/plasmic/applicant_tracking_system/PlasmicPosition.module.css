@@ -21,6 +21,12 @@
 .root > * {
   grid-column: 4;
 }
+.pageLayout:global(.__wab_instance):global(.__wab_instance) {
+  transition-property: all;
+  transition-duration: 1s;
+  -webkit-transition-property: all;
+  -webkit-transition-duration: 1s;
+}
 .section {
   display: grid;
   align-content: flex-start;

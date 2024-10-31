@@ -65,7 +65,6 @@ import {
 import PageLayout from "../../PageLayout"; // plasmic-import: cNhW0j82HfTQ/component
 import MetricCard from "../../MetricCard"; // plasmic-import: RLZ-nptZF-cn/component
 import { SimpleChart } from "@plasmicpkgs/react-chartjs-2";
-import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 import { RichTable } from "@plasmicpkgs/plasmic-rich-components/skinny/rich-table";
 import { tableHelpers as RichTable_Helpers } from "@plasmicpkgs/plasmic-rich-components/skinny/rich-table";
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
@@ -92,9 +91,8 @@ export const PlasmicDashboard__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicDashboard__OverridesType = {
   root?: Flex__<"div">;
-  pageLayout?: Flex__<typeof PageLayout>;
+  qaq?: Flex__<typeof PageLayout>;
   section?: Flex__<"section">;
-  button?: Flex__<typeof AntdButton>;
   positions?: Flex__<typeof RichTable>;
 };
 
@@ -244,9 +242,9 @@ function PlasmicDashboard__RenderFunc(props: {
           )}
         >
           <PageLayout
-            data-plasmic-name={"pageLayout"}
-            data-plasmic-override={overrides.pageLayout}
-            className={classNames("__wab_instance", sty.pageLayout)}
+            data-plasmic-name={"qaq"}
+            data-plasmic-override={overrides.qaq}
+            className={classNames("__wab_instance", sty.qaq)}
           >
             <DataCtxReader__>
               {$ctx => (
@@ -268,7 +266,7 @@ function PlasmicDashboard__RenderFunc(props: {
                         sty.h4__ev7CN
                       )}
                     >
-                      {"\u5bf9\u51b2\u57fa\u91d1"}
+                      {"Time Foundation "}
                     </h4>
                     <Stack__
                       as={"div"}
@@ -280,7 +278,7 @@ function PlasmicDashboard__RenderFunc(props: {
                           "__wab_instance",
                           sty.metricCard__e7IZn
                         )}
-                        slot={"\u5df2\u8ba2\u9605\u7684\u7528\u6237"}
+                        slot={"Subscribed"}
                         slot2={"Jan 1, 2022 - June 30, 2024"}
                       >
                         <React.Fragment>
@@ -312,34 +310,52 @@ function PlasmicDashboard__RenderFunc(props: {
                               sty.text__yywte
                             )}
                           >
-                            {"\u5e73\u5747\u5386\u53f2\u6536\u76ca"}
+                            {"Profit"}
                           </div>
                         }
+                        slot2={"Jan 1, 2023 - June 30, 2024"}
                       >
-                        <React.Fragment>
-                          {(() => {
-                            try {
-                              return "86.5%";
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return "#";
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text__oi4VF
+                          )}
+                        >
+                          <React.Fragment>
+                            {(() => {
+                              try {
+                                return "86.5%";
+                              } catch (e) {
+                                if (
+                                  e instanceof TypeError ||
+                                  e?.plasmicType === "PlasmicUndefinedDataError"
+                                ) {
+                                  return "#";
+                                }
+                                throw e;
                               }
-                              throw e;
-                            }
-                          })()}
-                        </React.Fragment>
+                            })()}
+                          </React.Fragment>
+                        </div>
                       </MetricCard>
                       <MetricCard
                         className={classNames(
                           "__wab_instance",
                           sty.metricCard___41Tw3
                         )}
-                        slot={"\u98ce\u9669\u6307\u6570"}
+                        slot={"Daily profit"}
+                        slot2={"Jan 1, 2023 - June 30, 2024"}
                       >
-                        {"15%"}
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text__bvP9H
+                          )}
+                        >
+                          {"15.6%"}
+                        </div>
                       </MetricCard>
                     </Stack__>
                     <Stack__
@@ -363,7 +379,7 @@ function PlasmicDashboard__RenderFunc(props: {
                             sty.h4__pGezZ
                           )}
                         >
-                          {"\u57fa\u91d1\u6bcf\u65e5\u6536\u76ca"}
+                          {"Day"}
                         </h4>
                         <p
                           className={classNames(
@@ -373,39 +389,15 @@ function PlasmicDashboard__RenderFunc(props: {
                             sty.p__cYSfG
                           )}
                         >
-                          {"Jan 1, 2023 - June 30, 2023"}
+                          {""}
                         </p>
                         <SimpleChart
                           className={classNames(
                             "__wab_instance",
-                            sty.chart__ho9Td
+                            sty.chart__hut18
                           )}
-                          data={(() => {
-                            const byDept = ((
-                              x = $queries.candidates.data,
-                              f = c =>
-                                $queries.positions.data.find(
-                                  p => p.id === c.position_id
-                                )?.dept,
-                              r = {}
-                            ) => (
-                              x.forEach(v => (r[f(v)] ??= []).push(v)), r
-                            ))();
-
-                            for (const key in byDept) {
-                              byDept[key] =
-                                byDept[key]
-                                  .map(a => a.status === "Offer accepted")
-                                  .reduce((a, b) => a + b) / byDept[key].length;
-                            }
-
-                            return Object.entries(byDept).map(([k, v]) => ({
-                              dept: k,
-                              ratio: v
-                            }));
-                          })()}
-                          interactive={true}
-                          labelField={"dept"}
+                          data={$queries.hires.data}
+                          type={"line"}
                         />
                       </Stack__>
                       <Stack__
@@ -424,7 +416,7 @@ function PlasmicDashboard__RenderFunc(props: {
                             sty.h4__g8ECq
                           )}
                         >
-                          {"Applicant flow"}
+                          {"Month"}
                         </h4>
                         <p
                           className={classNames(
@@ -434,15 +426,19 @@ function PlasmicDashboard__RenderFunc(props: {
                             sty.p__haGt8
                           )}
                         >
-                          {"Jan 1, 2023 - June 30, 2023"}
+                          {""}
                         </p>
                         <SimpleChart
                           className={classNames(
                             "__wab_instance",
-                            sty.chart__hut18
+                            sty.chart__uJF7
                           )}
-                          data={$queries.hires.data}
-                          type={"line"}
+                          data={[
+                            { region: "APAC", revenue: 3294, spend: 2675 },
+                            { region: "EMEA", revenue: 3245, spend: 3895 },
+                            { region: "LATAM", revenue: 2165, spend: 3498 },
+                            { region: "AMER", revenue: 3215, spend: 1656 }
+                          ]}
                         />
                       </Stack__>
                     </Stack__>
@@ -475,7 +471,7 @@ function PlasmicDashboard__RenderFunc(props: {
                               sty.h4__l38FF
                             )}
                           >
-                            {"\u5f00\u4ed3\u8bb0\u5f55"}
+                            {"Record"}
                           </h4>
                           <p
                             className={classNames(
@@ -485,28 +481,9 @@ function PlasmicDashboard__RenderFunc(props: {
                               sty.p__k8Gcc
                             )}
                           >
-                            {
-                              "View the top job listings across your organization based on applicant numbers, views, and interview progress."
-                            }
+                            {"All records can be accessed in the open market."}
                           </p>
                         </Stack__>
-                        <AntdButton
-                          data-plasmic-name={"button"}
-                          data-plasmic-override={overrides.button}
-                          className={classNames("__wab_instance", sty.button)}
-                          size={"large"}
-                          type={"primary"}
-                        >
-                          <div
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.text__lbc74
-                            )}
-                          >
-                            {"Add a job"}
-                          </div>
-                        </AntdButton>
                       </Stack__>
                       {(() => {
                         const child$Props = {
@@ -537,7 +514,7 @@ function PlasmicDashboard__RenderFunc(props: {
                           fields: (() => {
                             const __composite = [
                               { key: "id", fieldId: "id", isHidden: null },
-                              { key: "title", fieldId: "title" },
+                              { key: "title", fieldId: "title", title: null },
                               {
                                 key: "description",
                                 fieldId: "description",
@@ -554,8 +531,12 @@ function PlasmicDashboard__RenderFunc(props: {
                                 fieldId: "archived",
                                 isHidden: null
                               },
-                              { key: "created_at", fieldId: "created_at" },
-                              { key: "dept", fieldId: "dept" },
+                              {
+                                key: "created_at",
+                                fieldId: "created_at",
+                                title: null
+                              },
+                              { key: "dept", fieldId: "dept", isHidden: null },
                               {
                                 key: "num_candidates",
                                 fieldId: "num_candidates",
@@ -563,18 +544,24 @@ function PlasmicDashboard__RenderFunc(props: {
                               },
                               {
                                 key: "num_active_candidates",
-                                fieldId: "num_active_candidates"
+                                fieldId: "num_active_candidates",
+                                title: null
                               }
                             ];
                             __composite["0"]["isHidden"] = true;
+                            __composite["1"]["title"] = "Market";
                             __composite["2"]["isHidden"] = true;
                             __composite["3"]["title"] = "dept";
                             __composite["3"]["isHidden"] = true;
                             __composite["4"]["isHidden"] = true;
+                            __composite["5"]["title"] = "Time";
+                            __composite["6"]["isHidden"] = true;
                             __composite["7"]["isHidden"] = true;
+                            __composite["8"]["title"] = "Profit";
                             return __composite;
                           })(),
 
+                          hideExports: true,
                           onRowSelectionChanged: async (...eventArgs: any) => {
                             generateStateOnChangePropForCodeComponents(
                               $state,
@@ -667,10 +654,9 @@ function PlasmicDashboard__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "pageLayout", "section", "button", "positions"],
-  pageLayout: ["pageLayout", "section", "button", "positions"],
-  section: ["section", "button", "positions"],
-  button: ["button"],
+  root: ["root", "qaq", "section", "positions"],
+  qaq: ["qaq", "section", "positions"],
+  section: ["section", "positions"],
   positions: ["positions"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -678,9 +664,8 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   root: "div";
-  pageLayout: typeof PageLayout;
+  qaq: typeof PageLayout;
   section: "section";
-  button: typeof AntdButton;
   positions: typeof RichTable;
 };
 
@@ -786,9 +771,8 @@ export const PlasmicDashboard = Object.assign(
   withUsePlasmicAuth(withPlasmicPageGuard(makeNodeComponent("root"))),
   {
     // Helper components rendering sub-elements
-    pageLayout: makeNodeComponent("pageLayout"),
+    qaq: makeNodeComponent("qaq"),
     section: makeNodeComponent("section"),
-    button: makeNodeComponent("button"),
     positions: makeNodeComponent("positions"),
 
     // Metadata about props expected for PlasmicDashboard

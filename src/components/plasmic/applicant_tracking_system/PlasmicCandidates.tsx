@@ -63,8 +63,7 @@ import {
 } from "@plasmicapp/react-web/lib/data-sources";
 
 import PageLayout from "../../PageLayout"; // plasmic-import: cNhW0j82HfTQ/component
-import { RichTable } from "@plasmicpkgs/plasmic-rich-components/skinny/rich-table";
-import { tableHelpers as RichTable_Helpers } from "@plasmicpkgs/plasmic-rich-components/skinny/rich-table";
+import { Embed } from "@plasmicpkgs/plasmic-basic-components";
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -88,9 +87,7 @@ export const PlasmicCandidates__ArgProps = new Array<ArgPropType>();
 export type PlasmicCandidates__OverridesType = {
   root?: Flex__<"div">;
   pageLayout?: Flex__<typeof PageLayout>;
-  section?: Flex__<"section">;
-  h1?: Flex__<"h1">;
-  table?: Flex__<typeof RichTable>;
+  embedHtml?: Flex__<typeof Embed>;
 };
 
 export interface DefaultCandidatesProps {
@@ -132,49 +129,7 @@ function PlasmicCandidates__RenderFunc(props: {
   let [$queries, setDollarQueries] = React.useState<
     Record<string, ReturnType<typeof usePlasmicDataOp>>
   >({});
-  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
-    () => [
-      {
-        path: "table.selectedRowKey",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
 
-        onMutate: generateOnMutateForSpec("selectedRowKey", RichTable_Helpers)
-      },
-      {
-        path: "table.selectedRow",
-        type: "private",
-        variableType: "object",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
-
-        onMutate: generateOnMutateForSpec("selectedRow", RichTable_Helpers)
-      },
-      {
-        path: "table.selectedRows",
-        type: "private",
-        variableType: "array",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
-
-        onMutate: generateOnMutateForSpec("selectedRows", RichTable_Helpers)
-      },
-      {
-        path: "table.selectedRowKeys",
-        type: "private",
-        variableType: "array",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
-
-        onMutate: generateOnMutateForSpec("selectedRowKeys", RichTable_Helpers)
-      }
-    ],
-    [$props, $ctx, $refs]
-  );
-  const $state = useDollarState(stateSpecs, {
-    $props,
-    $ctx,
-    $queries: $queries,
-    $refs
-  });
   const dataSourcesCtx = usePlasmicDataSourceContext();
 
   const new$Queries: Record<string, ReturnType<typeof usePlasmicDataOp>> = {
@@ -227,197 +182,18 @@ function PlasmicCandidates__RenderFunc(props: {
           <PageLayout
             data-plasmic-name={"pageLayout"}
             data-plasmic-override={overrides.pageLayout}
+            className={classNames("__wab_instance", sty.pageLayout)}
           >
             <DataCtxReader__>
               {$ctx => (
-                <section
-                  data-plasmic-name={"section"}
-                  data-plasmic-override={overrides.section}
-                  className={classNames(projectcss.all, sty.section)}
-                >
-                  <h1
-                    data-plasmic-name={"h1"}
-                    data-plasmic-override={overrides.h1}
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.h1,
-                      projectcss.__wab_text,
-                      sty.h1
-                    )}
-                  >
-                    {"Candidates"}
-                  </h1>
-                  {(() => {
-                    const child$Props = {
-                      canSelectRows: "click",
-                      className: classNames("__wab_instance", sty.table),
-                      data: (() => {
-                        try {
-                          return $queries.candidates;
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return undefined;
-                          }
-                          throw e;
-                        }
-                      })(),
-                      fields: (() => {
-                        const __composite = [
-                          { key: "id", fieldId: "id", isHidden: null },
-                          { key: "name", fieldId: "name" },
-                          { key: "email", fieldId: "email" },
-                          { key: "phone", fieldId: "phone" },
-                          {
-                            key: "position_id",
-                            fieldId: "position_id",
-                            expr: null,
-                            title: null
-                          },
-                          { key: "resume_url", fieldId: "resume_url" },
-                          { key: "notes", fieldId: "notes" },
-                          { key: "status", fieldId: "status" },
-                          { key: "created_at", fieldId: "created_at" }
-                        ];
-                        __composite["0"]["isHidden"] = true;
-                        __composite["4"]["expr"] = (
-                          currentItem,
-                          currentValue
-                        ) => {
-                          return $queries.positions.data.find(
-                            p => p.id === currentValue
-                          ).title;
-                        };
-                        __composite["4"]["title"] = "position";
-                        return __composite;
-                      })(),
-
-                      onRowClick: async (rowKey, row, event) => {
-                        const $steps = {};
-
-                        $steps["goToCandidate"] = true
-                          ? (() => {
-                              const actionArgs = {
-                                destination: `/candidate/${(() => {
-                                  try {
-                                    return row.id;
-                                  } catch (e) {
-                                    if (
-                                      e instanceof TypeError ||
-                                      e?.plasmicType ===
-                                        "PlasmicUndefinedDataError"
-                                    ) {
-                                      return undefined;
-                                    }
-                                    throw e;
-                                  }
-                                })()}`
-                              };
-                              return (({ destination }) => {
-                                if (
-                                  typeof destination === "string" &&
-                                  destination.startsWith("#")
-                                ) {
-                                  document
-                                    .getElementById(destination.substr(1))
-                                    .scrollIntoView({ behavior: "smooth" });
-                                } else {
-                                  location.assign(destination);
-                                }
-                              })?.apply(null, [actionArgs]);
-                            })()
-                          : undefined;
-                        if (
-                          $steps["goToCandidate"] != null &&
-                          typeof $steps["goToCandidate"] === "object" &&
-                          typeof $steps["goToCandidate"].then === "function"
-                        ) {
-                          $steps["goToCandidate"] = await $steps[
-                            "goToCandidate"
-                          ];
-                        }
-                      },
-                      onRowSelectionChanged: async (...eventArgs: any) => {
-                        generateStateOnChangePropForCodeComponents(
-                          $state,
-                          "selectedRowKey",
-                          ["table", "selectedRowKey"],
-                          RichTable_Helpers
-                        ).apply(null, eventArgs);
-                        generateStateOnChangePropForCodeComponents(
-                          $state,
-                          "selectedRow",
-                          ["table", "selectedRow"],
-                          RichTable_Helpers
-                        ).apply(null, eventArgs);
-                        generateStateOnChangePropForCodeComponents(
-                          $state,
-                          "selectedRows",
-                          ["table", "selectedRows"],
-                          RichTable_Helpers
-                        ).apply(null, eventArgs);
-                        generateStateOnChangePropForCodeComponents(
-                          $state,
-                          "selectedRowKeys",
-                          ["table", "selectedRowKeys"],
-                          RichTable_Helpers
-                        ).apply(null, eventArgs);
-                      },
-                      scopeClassName: sty["table__instance"],
-                      selectedRowKey: generateStateValueProp($state, [
-                        "table",
-                        "selectedRowKey"
-                      ]),
-                      selectedRowKeys: generateStateValueProp($state, [
-                        "table",
-                        "selectedRowKeys"
-                      ]),
-                      themeResetClassName: classNames(
-                        projectcss.root_reset,
-                        projectcss.root_reset_tags,
-                        projectcss.plasmic_default_styles,
-                        projectcss.plasmic_mixins,
-                        projectcss.plasmic_tokens,
-                        plasmic_antd_5_hostless_css.plasmic_tokens,
-                        plasmic_plasmic_rich_components_css.plasmic_tokens
-                      )
-                    };
-                    initializeCodeComponentStates(
-                      $state,
-                      [
-                        {
-                          name: "selectedRowKey",
-                          plasmicStateName: "table.selectedRowKey"
-                        },
-                        {
-                          name: "selectedRow",
-                          plasmicStateName: "table.selectedRow"
-                        },
-                        {
-                          name: "selectedRows",
-                          plasmicStateName: "table.selectedRows"
-                        },
-                        {
-                          name: "selectedRowKeys",
-                          plasmicStateName: "table.selectedRowKeys"
-                        }
-                      ],
-                      [],
-                      RichTable_Helpers ?? {},
-                      child$Props
-                    );
-
-                    return (
-                      <RichTable
-                        data-plasmic-name={"table"}
-                        data-plasmic-override={overrides.table}
-                        {...child$Props}
-                      />
-                    );
-                  })()}
-                </section>
+                <Embed
+                  data-plasmic-name={"embedHtml"}
+                  data-plasmic-override={overrides.embedHtml}
+                  className={classNames("__wab_instance", sty.embedHtml)}
+                  code={
+                    '<!DOCTYPE html>\r\n<html lang="en">\r\n<head>\r\n    <meta charset="UTF-8">\r\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\r\n    <title>Product Introduction: Time for Profit</title>\r\n    <style>\r\n        body {\r\n            font-family: Arial, sans-serif;\r\n            margin: 20px;\r\n        }\r\n        h1 {\r\n            color: #333;\r\n        }\r\n        p {\r\n            color: #555;\r\n            line-height: 1.6;\r\n        }\r\n        .container {\r\n            max-width: 800px;\r\n            margin: 0 auto;\r\n        }\r\n    </style>\r\n</head>\r\n<body>\r\n    <div class="container">\r\n        <h1>Product Introduction: Time for Profit - A Robust Investment Strategy with 300% Annual Returns</h1>\r\n        <p>Dear Investors,</p>\r\n        <p>We are excited to introduce our latest investment product, "Time for Profit," designed to deliver a remarkable 300% annual return through a unique blend of hedge fund strategies and timely market insights. Here\u2019s a concise overview of what makes this product a standout choice for your investment portfolio:</p>\r\n        <h2>Product Overview</h2>\r\n        <p>"Time for Profit" harmonizes sophisticated hedge fund tactics with real-time market intelligence, ensuring consistent growth across diverse market scenarios. Our meticulously curated portfolio aims to provide a secure, dependable, and lucrative investment avenue.</p>\r\n        <h2>Investment Philosophy</h2>\r\n        <p><strong>Time for Profit</strong>: By integrating long-term holdings with agile short-term trades, we capitalize on market volatility to maximize returns. Our multi-faceted hedge fund methodology, encompassing market-neutral strategies, arbitrage opportunities, and event-driven tactics, ensures stable returns and mitigates volatility.</p>\r\n        <h2>Investment Portfolio</h2>\r\n        <p>Our diversified portfolio spans equities, bonds, commodities, foreign exchange, and derivatives. This diversification enhances stability and potential returns. We focus on high-quality stocks for steady capital appreciation and dividend income, allocate to high-credit-rated bonds for stability, invest in key commodities to hedge against inflation, and exploit currency market fluctuations for gains.</p>\r\n        <h2>Risk Management</h2>\r\n        <p>We employ stringent controls and monitoring mechanisms to safeguard your investment. Regular risk assessments, rigorous stop-loss protocols, and dynamic adjustments ensure optimal alignment with market conditions.</p>\r\n        <h2>Return Expectations</h2>\r\n        <p>We are committed to delivering an impressive 300% annual return. With our expert team and advanced strategies, we are confident in achieving this goal and driving sustainable wealth growth.</p>\r\n        <h2>Client Services</h2>\r\n        <p>Our comprehensive client services include investment advisory, market analysis, regular reports, and personalized recommendations. Our dedicated team ensures you have the best possible experience.</p>\r\n        <h2>Conclusion</h2>\r\n        <p>"Time for Profit" represents an innovative and high-potential investment opportunity. We warmly invite you to join our program and share in the market\u2019s opportunities and rewards. For inquiries or further information, please contact us.</p>\r\n        <p>Wishing you a prosperous investment journey!</p>\r\n        <p>Sincerely,</p>\r\n        <p>Time foundation<br></p>\r\n    </div>\r\n</body>\r\n</html>'
+                  }
+                />
               )}
             </DataCtxReader__>
           </PageLayout>
@@ -428,11 +204,9 @@ function PlasmicCandidates__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "pageLayout", "section", "h1", "table"],
-  pageLayout: ["pageLayout", "section", "h1", "table"],
-  section: ["section", "h1", "table"],
-  h1: ["h1"],
-  table: ["table"]
+  root: ["root", "pageLayout", "embedHtml"],
+  pageLayout: ["pageLayout", "embedHtml"],
+  embedHtml: ["embedHtml"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -440,9 +214,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   pageLayout: typeof PageLayout;
-  section: "section";
-  h1: "h1";
-  table: typeof RichTable;
+  embedHtml: typeof Embed;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -548,9 +320,7 @@ export const PlasmicCandidates = Object.assign(
   {
     // Helper components rendering sub-elements
     pageLayout: makeNodeComponent("pageLayout"),
-    section: makeNodeComponent("section"),
-    h1: makeNodeComponent("h1"),
-    table: makeNodeComponent("table"),
+    embedHtml: makeNodeComponent("embedHtml"),
 
     // Metadata about props expected for PlasmicCandidates
     internalVariantProps: PlasmicCandidates__VariantProps,

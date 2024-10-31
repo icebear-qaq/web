@@ -8,9 +8,9 @@
   min-height: 0;
   padding: 0px;
 }
-.pageLayout:global(.__wab_instance):global(.__wab_instance) {
+.qaq:global(.__wab_instance):global(.__wab_instance) {
   position: relative;
-  height: 1801px;
+  height: 1846px;
   flex-shrink: 0;
 }
 .section {
@@ -126,11 +126,17 @@
 .metricCard___22Gk0:global(.__wab_instance) {
   position: relative;
 }
+.text__oi4VF {
+  color: var(--token-U2IgSncNyCpY);
+}
 .text__yywte {
-  padding-right: 0px;
+  padding-bottom: 0px;
 }
 .metricCard___41Tw3:global(.__wab_instance) {
   position: relative;
+}
+.text__bvP9H {
+  color: var(--token-U2IgSncNyCpY);
 }
 .freeBox__nYjtm {
   position: relative;
@@ -189,6 +195,7 @@
   width: 100%;
   background: var(--token-GkyY_vBieF55);
   position: relative;
+  max-width: 100%;
   min-width: 0;
   border-radius: 12px;
   padding: 24px;
@@ -232,12 +239,20 @@
   color: var(--token-0Y4wayQ7XVs4);
   min-width: 0;
 }
+.chart__hut18:global(.__wab_instance) {
+  width: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  position: relative;
+  min-width: 0;
+}
 .freeBox__d1Zkl {
   display: flex;
   flex-direction: column;
   width: 100%;
   background: var(--token-GkyY_vBieF55);
   position: relative;
+  max-width: 100%;
   min-width: 0;
   border-radius: 12px;
   padding: 24px;
@@ -269,6 +284,7 @@
   max-width: 800px;
   left: auto;
   top: auto;
+  padding-top: 0px;
   min-width: 0;
 }
 .p__haGt8 {
@@ -281,11 +297,10 @@
   color: var(--token-0Y4wayQ7XVs4);
   min-width: 0;
 }
-.chart__hut18:global(.__wab_instance) {
+.chart__uJF7:global(.__wab_instance) {
   width: 100%;
   max-width: 100%;
   object-fit: cover;
-  position: relative;
   min-width: 0;
 }
 .freeBox__aV7EZ {
@@ -391,6 +406,7 @@
   height: auto;
   max-width: 800px;
   margin-top: 0px;
+  padding-top: 0px;
   min-width: 0;
 }
 .p__k8Gcc {
@@ -403,18 +419,14 @@
   color: var(--token-0Y4wayQ7XVs4);
   min-width: 0;
 }
-.button:global(.__wab_instance) {
-  max-width: 100%;
-  object-fit: cover;
-  position: relative;
-}
-.text__lbc74 {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-}
 .positions:global(.__wab_instance) {
   object-fit: cover;
+  max-width: 1097px;
+  width: 100%;
+  box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.2);
+  transition-property: all;
+  transition-duration: 1s;
+  min-width: 0;
+  -webkit-transition-property: all;
+  -webkit-transition-duration: 1s;
 }

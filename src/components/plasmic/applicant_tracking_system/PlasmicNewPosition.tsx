@@ -68,8 +68,8 @@ import { formHelpers as FormWrapper_Helpers } from "@plasmicpkgs/antd5/skinny/Fo
 import { FormItemWrapper } from "@plasmicpkgs/antd5/skinny/FormItem";
 import { AntdInput } from "@plasmicpkgs/antd5/skinny/registerInput";
 import { inputHelpers as AntdInput_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
-import { AntdSelect } from "@plasmicpkgs/antd5/skinny/registerSelect";
 import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
+import { Embed } from "@plasmicpkgs/plasmic-basic-components";
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -96,9 +96,8 @@ export type PlasmicNewPosition__OverridesType = {
   section?: Flex__<"section">;
   h1?: Flex__<"h1">;
   form?: Flex__<typeof FormWrapper>;
-  select?: Flex__<typeof AntdSelect>;
   button?: Flex__<typeof AntdButton>;
-  text?: Flex__<"div">;
+  embedHtml?: Flex__<typeof Embed>;
 };
 
 export interface DefaultNewPositionProps {
@@ -230,7 +229,7 @@ function PlasmicNewPosition__RenderFunc(props: {
                       sty.h1
                     )}
                   >
-                    {"New position"}
+                    {"Join"}
                   </h1>
                   {(() => {
                     const child$Props = {
@@ -320,6 +319,54 @@ function PlasmicNewPosition__RenderFunc(props: {
                             "goToPositions"
                           ];
                         }
+
+                        $steps["runCode"] = true
+                          ? (() => {
+                              const actionArgs = {
+                                customFunction: async () => {
+                                  return undefined;
+                                }
+                              };
+                              return (({ customFunction }) => {
+                                return customFunction();
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["runCode"] != null &&
+                          typeof $steps["runCode"] === "object" &&
+                          typeof $steps["runCode"].then === "function"
+                        ) {
+                          $steps["runCode"] = await $steps["runCode"];
+                        }
+
+                        $steps["updateStateVariable"] = true
+                          ? (() => {
+                              const actionArgs = {};
+                              return (({
+                                variable,
+                                value,
+                                startIndex,
+                                deleteCount
+                              }) => {
+                                if (!variable) {
+                                  return;
+                                }
+                                const { objRoot, variablePath } = variable;
+                                undefined;
+                              })?.apply(null, [actionArgs]);
+                            })()
+                          : undefined;
+                        if (
+                          $steps["updateStateVariable"] != null &&
+                          typeof $steps["updateStateVariable"] === "object" &&
+                          typeof $steps["updateStateVariable"].then ===
+                            "function"
+                        ) {
+                          $steps["updateStateVariable"] = await $steps[
+                            "updateStateVariable"
+                          ];
+                        }
                       },
                       onIsSubmittingChange:
                         generateStateOnChangePropForCodeComponents(
@@ -359,74 +406,34 @@ function PlasmicNewPosition__RenderFunc(props: {
                         <FormItemWrapper
                           className={classNames(
                             "__wab_instance",
-                            sty.formField__bXklR
+                            sty.formField__rItCt
                           )}
-                          label={"Title"}
+                          label={"Wallet address"}
                           name={"title"}
                         >
                           <AntdInput
                             className={classNames(
                               "__wab_instance",
-                              sty.input__b8Dgj
+                              sty.input__sfxQn
                             )}
                           />
                         </FormItemWrapper>
                         <FormItemWrapper
                           className={classNames(
                             "__wab_instance",
-                            sty.formField__sARoy
+                            sty.formField__kaTrw
                           )}
-                          label={"Description"}
-                          name={"description"}
+                          label={"Referrer"}
                         >
                           <AntdInput
                             className={classNames(
                               "__wab_instance",
-                              sty.input__khyNe
+                              sty.input__gb2Qd
                             )}
-                          />
-                        </FormItemWrapper>
-                        <FormItemWrapper
-                          className={classNames(
-                            "__wab_instance",
-                            sty.formField__h9Mp3
-                          )}
-                          label={"Department"}
-                          name={"department_id"}
-                        >
-                          <AntdSelect
-                            className={classNames("__wab_instance", sty.select)}
-                            defaultStylesClassName={classNames(
-                              projectcss.root_reset,
-                              projectcss.plasmic_default_styles,
-                              projectcss.plasmic_mixins,
-                              projectcss.plasmic_tokens,
-                              plasmic_antd_5_hostless_css.plasmic_tokens,
-                              plasmic_plasmic_rich_components_css.plasmic_tokens
-                            )}
-                            options={(() => {
-                              try {
-                                return $queries.depts.data.map(d => ({
-                                  label: d.name,
-                                  value: d.id
-                                }));
-                              } catch (e) {
-                                if (
-                                  e instanceof TypeError ||
-                                  e?.plasmicType === "PlasmicUndefinedDataError"
-                                ) {
-                                  return [];
-                                }
-                                throw e;
-                              }
-                            })()}
-                            placeholder={"Select..."}
-                            popupScopeClassName={sty["select__popup"]}
                           />
                         </FormItemWrapper>
                         <AntdButton
                           className={classNames("__wab_instance", sty.button)}
-                          size={"large"}
                           submitsForm={true}
                           type={"primary"}
                         >
@@ -434,7 +441,7 @@ function PlasmicNewPosition__RenderFunc(props: {
                             className={classNames(
                               projectcss.all,
                               projectcss.__wab_text,
-                              sty.text
+                              sty.text__b8Sa0
                             )}
                           >
                             {"Submit"}
@@ -443,6 +450,52 @@ function PlasmicNewPosition__RenderFunc(props: {
                       </FormWrapper>
                     );
                   })()}
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__noEJm
+                    )}
+                  >
+                    {""}
+                  </div>
+                  <Embed
+                    data-plasmic-name={"embedHtml"}
+                    data-plasmic-override={overrides.embedHtml}
+                    className={classNames("__wab_instance", sty.embedHtml)}
+                    code={
+                      '<!DOCTYPE html>\r\n<html lang="en">\r\n<head>\r\n    <meta charset="UTF-8">\r\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\r\n    <title>Join Time Foundation</title>\r\n</head>\r\n<body>\r\n    <h1>Join Time Foundation</h1>\r\n    <p><strong>Official Wallet Address:</strong> 0xc9126DFeE74976D28Aaa6f1B03fe1f3A61f052bc</p>\r\n    <p><strong>Note:</strong> Delegations support stacking, and they will be automatically combined.</p>\r\n    <ol>\r\n        <li>Initiate your delegation (ranging from 2000 USDT to 10000 USDT),</li>\r\n        <li>Direct it to the official Time Foundation address: <code>0xc9126DFeE74976D28Aaa6f1B03fe1f3A61f052bc</code>,</li>\r\n        <li>Input your wallet details above (ensure it matches the address used for the delegation; this will serve as your unique identifier!),</li>\r\n        <li>Include your invitation code (mandatory).</li>\r\n        <li>Click \'Submit\' to officially join Time Foundation.</li>\r\n    </ol>\r\n</body>\r\n</html>'
+                    }
+                  />
+
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__tiJ1I
+                    )}
+                  >
+                    <React.Fragment>
+                      <span
+                        className={"plasmic_default__all plasmic_default__span"}
+                        style={{ fontWeight: 700 }}
+                      >
+                        {
+                          "After successfully joining, you can check your profits on Time Foundation using your wallet address (accessible to anyone). After the delegation period ends, your principal and profits will be returned to your wallet address."
+                        }
+                      </span>
+                      <React.Fragment>{""}</React.Fragment>
+                      <span
+                        className={"plasmic_default__all plasmic_default__span"}
+                        style={{
+                          fontWeight: 700,
+                          color: "var(--token-Bo2_tT25lwh4)"
+                        }}
+                      >
+                        {" Please make sure to remember your wallet address."}
+                      </span>
+                    </React.Fragment>
+                  </div>
                 </section>
               )}
             </DataCtxReader__>
@@ -454,31 +507,13 @@ function PlasmicNewPosition__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: [
-    "root",
-    "pageLayout",
-    "section",
-    "h1",
-    "form",
-    "select",
-    "button",
-    "text"
-  ],
-  pageLayout: [
-    "pageLayout",
-    "section",
-    "h1",
-    "form",
-    "select",
-    "button",
-    "text"
-  ],
-  section: ["section", "h1", "form", "select", "button", "text"],
+  root: ["root", "pageLayout", "section", "h1", "form", "button", "embedHtml"],
+  pageLayout: ["pageLayout", "section", "h1", "form", "button", "embedHtml"],
+  section: ["section", "h1", "form", "button", "embedHtml"],
   h1: ["h1"],
-  form: ["form", "select", "button", "text"],
-  select: ["select"],
-  button: ["button", "text"],
-  text: ["text"]
+  form: ["form", "button"],
+  button: ["button"],
+  embedHtml: ["embedHtml"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -489,9 +524,8 @@ type NodeDefaultElementType = {
   section: "section";
   h1: "h1";
   form: typeof FormWrapper;
-  select: typeof AntdSelect;
   button: typeof AntdButton;
-  text: "div";
+  embedHtml: typeof Embed;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -583,9 +617,8 @@ export const PlasmicNewPosition = Object.assign(
     section: makeNodeComponent("section"),
     h1: makeNodeComponent("h1"),
     form: makeNodeComponent("form"),
-    select: makeNodeComponent("select"),
     button: makeNodeComponent("button"),
-    text: makeNodeComponent("text"),
+    embedHtml: makeNodeComponent("embedHtml"),
 
     // Metadata about props expected for PlasmicNewPosition
     internalVariantProps: PlasmicNewPosition__VariantProps,

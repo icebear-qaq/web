@@ -64,7 +64,6 @@ import {
 
 import PageLayout from "../../PageLayout"; // plasmic-import: cNhW0j82HfTQ/component
 import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
-import { RichList } from "@plasmicpkgs/plasmic-rich-components/skinny/rich-list";
 import { RichTable } from "@plasmicpkgs/plasmic-rich-components/skinny/rich-table";
 import { tableHelpers as RichTable_Helpers } from "@plasmicpkgs/plasmic-rich-components/skinny/rich-table";
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
@@ -93,7 +92,10 @@ export type PlasmicPositions__OverridesType = {
   root?: Flex__<"div">;
   pageLayout?: Flex__<typeof PageLayout>;
   section?: Flex__<"section">;
-  dataList?: Flex__<typeof RichList>;
+  h4?: Flex__<"h4">;
+  p?: Flex__<"p">;
+  button?: Flex__<typeof AntdButton>;
+  text?: Flex__<"div">;
   positions?: Flex__<typeof RichTable>;
 };
 
@@ -180,7 +182,6 @@ function PlasmicPositions__RenderFunc(props: {
     $refs
   });
   const dataSourcesCtx = usePlasmicDataSourceContext();
-  const plasmicInvalidate = usePlasmicInvalidate();
 
   const new$Queries: Record<string, ReturnType<typeof usePlasmicDataOp>> = {
     positions: usePlasmicDataOp(() => {
@@ -253,164 +254,6 @@ function PlasmicPositions__RenderFunc(props: {
                     <Stack__
                       as={"div"}
                       hasGap={true}
-                      className={classNames(projectcss.all, sty.freeBox__gTkhb)}
-                    >
-                      <Stack__
-                        as={"div"}
-                        hasGap={true}
-                        className={classNames(
-                          projectcss.all,
-                          sty.freeBox__kkQcK
-                        )}
-                      >
-                        <Stack__
-                          as={"div"}
-                          hasGap={true}
-                          className={classNames(
-                            projectcss.all,
-                            sty.freeBox__dV1Bi
-                          )}
-                        >
-                          <h4
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.h4,
-                              projectcss.__wab_text,
-                              sty.h4___20UdL
-                            )}
-                          >
-                            {"Departments"}
-                          </h4>
-                          <p
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.p,
-                              projectcss.__wab_text,
-                              sty.p__djAbq
-                            )}
-                          >
-                            {
-                              "There are two queries on this page. One is for depts, and the other is for positions."
-                            }
-                          </p>
-                        </Stack__>
-                        <AntdButton
-                          className={classNames(
-                            "__wab_instance",
-                            sty.button___9RkTc
-                          )}
-                          href={`/new-department`}
-                          size={"large"}
-                          type={"primary"}
-                        >
-                          <div
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.text__c74NQ
-                            )}
-                          >
-                            {"Add a dept"}
-                          </div>
-                        </AntdButton>
-                      </Stack__>
-                      <RichList
-                        data-plasmic-name={"dataList"}
-                        data-plasmic-override={overrides.dataList}
-                        bordered={true}
-                        className={classNames("__wab_instance", sty.dataList)}
-                        data={(() => {
-                          try {
-                            return $queries.depts;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return undefined;
-                            }
-                            throw e;
-                          }
-                        })()}
-                        rowActions={(() => {
-                          const __composite = [
-                            { type: null, label: null, children: null }
-                          ];
-                          __composite["0"]["type"] = "menu";
-                          __composite["0"]["label"] = "...";
-                          __composite["0"]["children"] = (() => {
-                            const __composite = [
-                              { label: null, onClick: null }
-                            ];
-                            __composite["0"]["label"] = "Delete";
-                            __composite["0"]["onClick"] = async (
-                              rowKey,
-                              row
-                            ) => {
-                              const $steps = {};
-
-                              $steps["tutorialdbDeleteMany"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      dataOp: {
-                                        sourceId: "gtYKLw7KRCthUM7M1zjfhd",
-                                        opId: "26aaa7b1-4191-4e99-a576-4e16e13d2325",
-                                        userArgs: {
-                                          conditions: [row.id]
-                                        },
-                                        cacheKey: null,
-                                        invalidatedKeys: [
-                                          "plasmic_refresh_all"
-                                        ],
-                                        roleId: null
-                                      }
-                                    };
-                                    return (async ({
-                                      dataOp,
-                                      continueOnError
-                                    }) => {
-                                      try {
-                                        const response =
-                                          await executePlasmicDataOp(dataOp, {
-                                            userAuthToken:
-                                              dataSourcesCtx?.userAuthToken,
-                                            user: dataSourcesCtx?.user
-                                          });
-                                        await plasmicInvalidate(
-                                          dataOp.invalidatedKeys
-                                        );
-                                        return response;
-                                      } catch (e) {
-                                        if (!continueOnError) {
-                                          throw e;
-                                        }
-                                        return e;
-                                      }
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                $steps["tutorialdbDeleteMany"] != null &&
-                                typeof $steps["tutorialdbDeleteMany"] ===
-                                  "object" &&
-                                typeof $steps["tutorialdbDeleteMany"].then ===
-                                  "function"
-                              ) {
-                                $steps["tutorialdbDeleteMany"] = await $steps[
-                                  "tutorialdbDeleteMany"
-                                ];
-                              }
-                            };
-                            return __composite;
-                          })();
-                          return __composite;
-                        })()}
-                        type={"grid"}
-                      />
-                    </Stack__>
-                    <Stack__
-                      as={"div"}
-                      hasGap={true}
                       className={classNames(projectcss.all, sty.freeBox__ymNkv)}
                     >
                       <Stack__
@@ -430,45 +273,162 @@ function PlasmicPositions__RenderFunc(props: {
                           )}
                         >
                           <h4
+                            data-plasmic-name={"h4"}
+                            data-plasmic-override={overrides.h4}
                             className={classNames(
                               projectcss.all,
                               projectcss.h4,
                               projectcss.__wab_text,
-                              sty.h4__cq8Qx
+                              sty.h4
                             )}
                           >
-                            {"Jobs"}
+                            {"Join"}
                           </h4>
                           <p
+                            data-plasmic-name={"p"}
+                            data-plasmic-override={overrides.p}
                             className={classNames(
                               projectcss.all,
                               projectcss.p,
                               projectcss.__wab_text,
-                              sty.p__ky4Nb
+                              sty.p
                             )}
                           >
                             {
-                              "View all job listings across your organization and their applicant numbers. This one uses a custom SQL query to also pull in the number of items."
+                              "View all users who have joined, with the wallet address as the unique identifier."
                             }
                           </p>
                         </Stack__>
                         <AntdButton
-                          className={classNames(
-                            "__wab_instance",
-                            sty.button___4VLR
-                          )}
+                          data-plasmic-name={"button"}
+                          data-plasmic-override={overrides.button}
+                          className={classNames("__wab_instance", sty.button)}
                           href={`/new-position`}
+                          onClick={async () => {
+                            const $steps = {};
+
+                            $steps["goToPosition"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    destination: `/position/${""}`
+                                  };
+                                  return (({ destination }) => {
+                                    if (
+                                      typeof destination === "string" &&
+                                      destination.startsWith("#")
+                                    ) {
+                                      document
+                                        .getElementById(destination.substr(1))
+                                        .scrollIntoView({ behavior: "smooth" });
+                                    } else {
+                                      location.assign(destination);
+                                    }
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["goToPosition"] != null &&
+                              typeof $steps["goToPosition"] === "object" &&
+                              typeof $steps["goToPosition"].then === "function"
+                            ) {
+                              $steps["goToPosition"] = await $steps[
+                                "goToPosition"
+                              ];
+                            }
+
+                            $steps["updatePositionsSelectedRowKey"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: [
+                                        "positions",
+                                        "selectedRowKey"
+                                      ]
+                                    },
+                                    operation: 0
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["updatePositionsSelectedRowKey"] != null &&
+                              typeof $steps["updatePositionsSelectedRowKey"] ===
+                                "object" &&
+                              typeof $steps["updatePositionsSelectedRowKey"]
+                                .then === "function"
+                            ) {
+                              $steps["updatePositionsSelectedRowKey"] =
+                                await $steps["updatePositionsSelectedRowKey"];
+                            }
+
+                            $steps["updatePositionsSelectedRowKey2"] = true
+                              ? (() => {
+                                  const actionArgs = {
+                                    variable: {
+                                      objRoot: $state,
+                                      variablePath: [
+                                        "positions",
+                                        "selectedRowKey"
+                                      ]
+                                    },
+                                    operation: 0
+                                  };
+                                  return (({
+                                    variable,
+                                    value,
+                                    startIndex,
+                                    deleteCount
+                                  }) => {
+                                    if (!variable) {
+                                      return;
+                                    }
+                                    const { objRoot, variablePath } = variable;
+
+                                    $stateSet(objRoot, variablePath, value);
+                                    return value;
+                                  })?.apply(null, [actionArgs]);
+                                })()
+                              : undefined;
+                            if (
+                              $steps["updatePositionsSelectedRowKey2"] !=
+                                null &&
+                              typeof $steps[
+                                "updatePositionsSelectedRowKey2"
+                              ] === "object" &&
+                              typeof $steps["updatePositionsSelectedRowKey2"]
+                                .then === "function"
+                            ) {
+                              $steps["updatePositionsSelectedRowKey2"] =
+                                await $steps["updatePositionsSelectedRowKey2"];
+                            }
+                          }}
                           size={"large"}
                           type={"primary"}
                         >
                           <div
+                            data-plasmic-name={"text"}
+                            data-plasmic-override={overrides.text}
                             className={classNames(
                               projectcss.all,
                               projectcss.__wab_text,
-                              sty.text___3OSFd
+                              sty.text
                             )}
                           >
-                            {"Add a job"}
+                            {"Join"}
                           </div>
                         </AntdButton>
                       </Stack__>
@@ -502,7 +462,7 @@ function PlasmicPositions__RenderFunc(props: {
                           fields: (() => {
                             const __composite = [
                               { key: "id", fieldId: "id", isHidden: null },
-                              { key: "title", fieldId: "title" },
+                              { key: "title", fieldId: "title", title: null },
                               {
                                 key: "description",
                                 fieldId: "description",
@@ -533,21 +493,27 @@ function PlasmicPositions__RenderFunc(props: {
                               {
                                 key: "num_active_candidates",
                                 fieldId: "num_active_candidates",
-                                title: null
+                                title: null,
+                                isHidden: null
                               }
                             ];
                             __composite["0"]["isHidden"] = true;
+                            __composite["1"]["title"] = "Address";
                             __composite["2"]["isHidden"] = true;
                             __composite["3"]["title"] = "dept";
                             __composite["3"]["isHidden"] = true;
                             __composite["4"]["isHidden"] = true;
                             __composite["5"]["isHidden"] = true;
-                            __composite["6"]["title"] = "Dept";
+                            __composite["6"]["title"] = "Investment";
                             __composite["7"]["isHidden"] = true;
                             __composite["8"]["title"] = "Active Candidates";
+                            __composite["8"]["isHidden"] = true;
                             return __composite;
                           })(),
 
+                          hideColumnPicker: true,
+                          hideExports: true,
+                          hideSearch: true,
                           onRowClick: async (rowKey, row, event) => {
                             const $steps = {};
 
@@ -685,10 +651,30 @@ function PlasmicPositions__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "pageLayout", "section", "dataList", "positions"],
-  pageLayout: ["pageLayout", "section", "dataList", "positions"],
-  section: ["section", "dataList", "positions"],
-  dataList: ["dataList"],
+  root: [
+    "root",
+    "pageLayout",
+    "section",
+    "h4",
+    "p",
+    "button",
+    "text",
+    "positions"
+  ],
+  pageLayout: [
+    "pageLayout",
+    "section",
+    "h4",
+    "p",
+    "button",
+    "text",
+    "positions"
+  ],
+  section: ["section", "h4", "p", "button", "text", "positions"],
+  h4: ["h4"],
+  p: ["p"],
+  button: ["button", "text"],
+  text: ["text"],
   positions: ["positions"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -698,7 +684,10 @@ type NodeDefaultElementType = {
   root: "div";
   pageLayout: typeof PageLayout;
   section: "section";
-  dataList: typeof RichList;
+  h4: "h4";
+  p: "p";
+  button: typeof AntdButton;
+  text: "div";
   positions: typeof RichTable;
 };
 
@@ -806,7 +795,10 @@ export const PlasmicPositions = Object.assign(
     // Helper components rendering sub-elements
     pageLayout: makeNodeComponent("pageLayout"),
     section: makeNodeComponent("section"),
-    dataList: makeNodeComponent("dataList"),
+    h4: makeNodeComponent("h4"),
+    p: makeNodeComponent("p"),
+    button: makeNodeComponent("button"),
+    text: makeNodeComponent("text"),
     positions: makeNodeComponent("positions"),
 
     // Metadata about props expected for PlasmicPositions

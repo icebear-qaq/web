@@ -57,6 +57,9 @@ import {
 
 import { RichLayout } from "@plasmicpkgs/plasmic-rich-components/skinny/rich-layout";
 import { LoadingBoundary } from "@plasmicpkgs/plasmic-basic-components";
+import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
+
+import { useScreenVariants as useScreenVariantstmwSNpl95Kx } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: -tmwSNpl95kx/globalVariant
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -82,7 +85,7 @@ type ArgPropType = keyof PlasmicPageLayout__ArgsType;
 export const PlasmicPageLayout__ArgProps = new Array<ArgPropType>("children");
 
 export type PlasmicPageLayout__OverridesType = {
-  root?: Flex__<typeof RichLayout>;
+  foundation?: Flex__<typeof RichLayout>;
   loadingBoundary?: Flex__<typeof LoadingBoundary>;
 };
 
@@ -123,10 +126,14 @@ function PlasmicPageLayout__RenderFunc(props: {
 
   const currentUser = useCurrentUser?.() || {};
 
+  const globalVariants = ensureGlobalVariants({
+    screen: useScreenVariantstmwSNpl95Kx()
+  });
+
   return (
     <RichLayout
-      data-plasmic-name={"root"}
-      data-plasmic-override={overrides.root}
+      data-plasmic-name={"foundation"}
+      data-plasmic-override={overrides.foundation}
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
       className={classNames(
@@ -137,7 +144,7 @@ function PlasmicPageLayout__RenderFunc(props: {
         projectcss.plasmic_tokens,
         plasmic_antd_5_hostless_css.plasmic_tokens,
         plasmic_plasmic_rich_components_css.plasmic_tokens,
-        sty.root
+        sty.foundation
       )}
       layout={"side"}
       logoElement={
@@ -146,26 +153,47 @@ function PlasmicPageLayout__RenderFunc(props: {
           role={"img"}
         />
       }
-      navMenuItems={(() => {
-        const __composite = [
-          { path: null, name: null },
-          { path: null, name: null },
-          { path: null, name: null }
-        ];
-        __composite["0"]["path"] = "/";
-        __composite["0"]["name"] = "Dashboard";
-        __composite["1"]["path"] = "/positions";
-        __composite["1"]["name"] = "Job Postings";
-        __composite["2"]["path"] = `/candidates`;
-        __composite["2"]["name"] = "Candidates";
-        return __composite;
-      })()}
+      navMenuItems={
+        hasVariant(globalVariants, "screen", "mobileOnly")
+          ? (() => {
+              const __composite = [
+                { path: null, name: null },
+                { path: null, name: null },
+                { path: null, name: null }
+              ];
+              __composite["0"]["path"] = "/";
+              __composite["0"]["name"] = "\u5e02\u573a";
+              __composite["1"]["path"] = "/positions";
+              __composite["1"]["name"] = "\u5173\u4e8e\u6211\u4eec";
+              __composite["2"]["path"] = `/candidates`;
+              __composite["2"]["name"] = "\u52a0\u5165\u6211\u4eec";
+              return __composite;
+            })()
+          : (() => {
+              const __composite = [
+                { path: null, name: null },
+                { path: null, name: null },
+                { path: null, name: null }
+              ];
+              __composite["0"]["path"] = "/";
+              __composite["0"]["name"] = "Market";
+              __composite["1"]["path"] = "/positions";
+              __composite["1"]["name"] = "Join";
+              __composite["2"]["path"] = `/candidates`;
+              __composite["2"]["name"] = "About";
+              return __composite;
+            })()
+      }
       simpleNavTheme={(() => {
         const __composite = { scheme: null };
         __composite["scheme"] = "primary";
         return __composite;
       })()}
-      title={"Applicant Tracker"}
+      title={
+        hasVariant(globalVariants, "screen", "mobileOnly")
+          ? "\u65f6\u95f4\u5bf9\u51b2\u57fa\u91d1"
+          : "Time Foundation"
+      }
     >
       <LoadingBoundary
         data-plasmic-name={"loadingBoundary"}
@@ -224,14 +252,14 @@ function PlasmicPageLayout__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "loadingBoundary"],
+  foundation: ["foundation", "loadingBoundary"],
   loadingBoundary: ["loadingBoundary"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
-  root: typeof RichLayout;
+  foundation: typeof RichLayout;
   loadingBoundary: typeof LoadingBoundary;
 };
 
@@ -282,7 +310,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
       forNode: nodeName
     });
   };
-  if (nodeName === "root") {
+  if (nodeName === "foundation") {
     func.displayName = "PlasmicPageLayout";
   } else {
     func.displayName = `PlasmicPageLayout.${nodeName}`;
@@ -292,7 +320,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
 
 export const PlasmicPageLayout = Object.assign(
   // Top-level PlasmicPageLayout renders the root element
-  makeNodeComponent("root"),
+  makeNodeComponent("foundation"),
   {
     // Helper components rendering sub-elements
     loadingBoundary: makeNodeComponent("loadingBoundary"),

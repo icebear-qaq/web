@@ -406,7 +406,7 @@ function PlasmicNewPosition__RenderFunc(props: {
                         <FormItemWrapper
                           className={classNames(
                             "__wab_instance",
-                            sty.formField__rItCt
+                            sty.formField___40LkX
                           )}
                           label={"Wallet address"}
                           name={"title"}
@@ -414,21 +414,21 @@ function PlasmicNewPosition__RenderFunc(props: {
                           <AntdInput
                             className={classNames(
                               "__wab_instance",
-                              sty.input__sfxQn
+                              sty.input__bHrAk
                             )}
                           />
                         </FormItemWrapper>
                         <FormItemWrapper
                           className={classNames(
                             "__wab_instance",
-                            sty.formField__kaTrw
+                            sty.formField__vhrCg
                           )}
                           label={"Referrer"}
                         >
                           <AntdInput
                             className={classNames(
                               "__wab_instance",
-                              sty.input__gb2Qd
+                              sty.input___54F3
                             )}
                           />
                         </FormItemWrapper>
@@ -441,7 +441,7 @@ function PlasmicNewPosition__RenderFunc(props: {
                             className={classNames(
                               projectcss.all,
                               projectcss.__wab_text,
-                              sty.text__b8Sa0
+                              sty.text__yeYad
                             )}
                           >
                             {"Submit"}
